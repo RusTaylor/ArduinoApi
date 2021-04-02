@@ -1,4 +1,7 @@
 <p>Способ установки номер 1 на Линуксе + Докер</p>
+
+В первую очередь удалите и создайте заново папку postgres которая лежит в папке docker
+
 <ul>
 <li>Установите докер(В консоли sudo apt install docker)</li>
 <li>Установите докер композ(В консоли sudo apt install docker-compose)</li>
@@ -44,7 +47,7 @@
 
 Установите OpenServer. Вот ссылка на установку и настройку(https://timeweb.com/ru/community/articles/ustanovka-i-nastroyka-openserver),
 там надо выбрать как веб-сервер nginx, версию пхп 7.*, т.е первая цифра 7, а после неё не важно
-и базу данных postgres
+и базу данных postgresql
 
 Положите проект в папку "Место установки OpenServer"/domains и запустите OpenServer
 
