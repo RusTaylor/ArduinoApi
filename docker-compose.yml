@@ -1,0 +1,39 @@
+version: "3"
+
+services:
+  arduino_nginx:
+    image: nginx:latest
+    ports:
+      - "8080:80"
+    volumes:
+      - ./:/app
+      - ./docker/nginx/:/etc/nginx/conf.d/
+    links:
+      - arduino_php7
+
+  arduino_php7:
+    build: ./docker/php
+    volumes:
+      - ./:/app
+    environment:
+      XDEBUG_CONFIG: "remote_host=192.168.220.1 remote_enable=1 remote_port=9001"
+      PHP_IDE_CONFIG: "serverName=Arduino"
+  arduino_postgres:
+    image: postgres:latest
+    volumes:
+    - ./docker/postgres:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: rustaylor
+      POSTGRES_PASSWORD: 9621
+      POSTGRES_DB: api
+    links:
+      - arduino_php7
+networks:
+  internal:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.220.0/24
