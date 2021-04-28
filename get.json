@@ -1,1 +1,1 @@
-"{\"name\":\"MyTestThing\",\"monitor\":{\"A2\":1.00,\"A3\":76.00,\"A4\":186.00},\"control\":{\"Control1\":\"on_off\",\"Control2\":\"inc_dec\",\"Ctrl3\":\"on_off\"}}"
+"{\"name\":\"MyTestThing3\",\"monitor\":{\"A\":7.00,\"B\":10.00,\"C\":20.00},\"control\":{\"D\":\"on_off\",\"E\":\"inc_dec\",\"F\":\"on_off\"}}"
