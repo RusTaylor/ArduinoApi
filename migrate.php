@@ -15,6 +15,16 @@ $opt = [
 $db = new PDO($dsn, $username, $password, $opt);
 
 $db->query("
+create table if not exists arduino_name
+(
+	id serial not null
+		constraint monitor_pk
+			primary key,
+	name varchar(255)
+);
+");
+
+$db->query("
 create table if not exists arduino_control_param
 (
 	arduino_id integer
@@ -25,16 +35,6 @@ create table if not exists arduino_control_param
 	param_value integer,
 	constraint arduino_control_param_pk
 		unique (arduino_id, param_name)
-);
-");
-
-$db->query("
-create table if not exists arduino_name
-(
-	id serial not null
-		constraint monitor_pk
-			primary key,
-	name varchar(255)
 );
 ");
 
