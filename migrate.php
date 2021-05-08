@@ -49,7 +49,7 @@ create table if not exists arduino_param
 	constraint arduino_param_pk
 		unique (arduino_id, param_name)
 );
-
-create index if not exists table_name_arduino_id_index
-	on arduino_param (arduino_id);
 ");
+
+$db->query("create index if not exists table_name_arduino_id_index
+	on arduino_param (arduino_id);");
