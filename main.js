@@ -11,7 +11,6 @@ function init(createNewListeners = true) {
             url: '/getData',
             type: 'POST',
             success: (res) => {
-                console.log(res)
                 renderData(res, createNewListeners);
             }
         })
@@ -77,10 +76,35 @@ function renderData(response, createNewListeners = true) {
             <span class="font-weight-bold">Имя ардуинки: </span><span class="font-italic">${arduinoName}</span>
         </div>
         ${content}
+        <div class="row justify-content-center mt-5">
+            <button class="btn btn-danger js-btn-remove" data-arduinoname="${arduinoName}">Удалить</button>
+        </div>
         </div>`
     })
 
     $('#mainContent').html(body);
+
+    $(document).on('click', '.js-btn-remove', (e) => {
+        let arduinoName = e.target.dataset['arduinoname']
+        let needDelete = confirm('Вы действительно хотите удалить ардуино ' + arduinoName)
+
+        if (!needDelete) {
+            return;
+        }
+
+        $.ajax({
+            url: '/delete',
+            type: "POST",
+            data: {
+                arduinoName: arduinoName
+            },
+            success: (response) => {
+                if (response['status'] === 'ok') {
+                    init();
+                }
+            }
+        })
+    })
 }
 
 function renderMonitorRow(monitorObject) {
