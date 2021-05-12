@@ -90,6 +90,27 @@ class Api
         $this->db->query("UPDATE arduino_control_param set param_value = {$value} where arduino_id = {$arduinoId} and param_name = '{$params[1]}'");
     }
 
+    public function deleteArduino($request)
+    {
+        if (empty($request)) {
+            return ['status' => 'error'];
+        }
+
+        $stmt = $this->db->query("SELECT id FROM arduino_name WHERE name = '" . $request['arduinoName'] . "'");
+
+        $id = ($stmt->fetch()['id']) ?? 0;
+
+        if ($id == 0) {
+            return ['status' => 'error'];
+        }
+
+        $this->db->query("DELETE FROM arduino_control_param WHERE arduino_id = $id");
+        $this->db->query("DELETE FROM arduino_param WHERE arduino_id = $id");
+        $this->db->query("DELETE FROM arduino_name WHERE id = $id");
+
+        return ['status' => 'ok'];
+    }
+
     private function getOrCreateArduinoIdByName($name)
     {
         $stmt = $this->db->query("SELECT id FROM arduino_name where name = '{$name}'");
