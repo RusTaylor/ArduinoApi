@@ -21,6 +21,12 @@ if ($_SERVER['REQUEST_URI'] == '/getData') {
     exit();
 }
 
+if ($_SERVER['REQUEST_URI'] == '/delete') {
+    header('Content-Type: application/json');
+    echo json_encode($api->deleteArduino($_POST));
+    exit();
+}
+
 if ($_SERVER['REQUEST_URI'] == '/changeData') {
     header('Content-Type: application/json');
     $api->changeData($_POST);
